@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.DAO.UsuarioDAO;
 import com.example.models.Usuario;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+
 @RestController
 public class UsuarioController {
 	@Autowired
@@ -75,6 +78,10 @@ public class UsuarioController {
 	
 	@PostMapping(value="api/usuarios")
 	public void registrarUsuario(@RequestBody Usuario usuario) {
+		Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+		
+		String pass_hasheado=argon2.hash(1, 1024, 1, usuario.getPassword());
+		usuario.setPassword(pass_hasheado);
 		usuarioDao.registrarUsuario(usuario);
 	}
 	

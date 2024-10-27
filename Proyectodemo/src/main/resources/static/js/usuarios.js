@@ -46,6 +46,6 @@ async function eliminarUsuarios(id){
 		'Content-Type': 'application/json'}
 	});
 	
-	location.reload();
+	window.location.href="usuarios.html";
 	
 }

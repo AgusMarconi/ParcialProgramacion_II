@@ -1,10 +1,9 @@
  $(document).ready(function() {
 	
-	registrarUsuario();
 });
 
- async function registrarUsuario(event){
-	event.preventDefault();
+ async function registrarUsuario(){
+
 	
 	let datos={};
 	datos.nombre=document.getElementById('txtNombre').value;
@@ -26,8 +25,8 @@
 					'Content-Type': 'application/json'},
 					body: JSON.stringify(datos)
 				});
+		window.location.href='login.html';
 	
 	}
 	
-	location.reload();
 }

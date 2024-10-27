@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	iniciarSesion();
 	
 });
 
@@ -26,6 +25,7 @@ $(document).ready(function() {
 		window.location.href="usuarios.html";
 	}else{
 		alert("Credenciales incorrectas. Intente nuevamente.");
+		window.location.href="login.html";
 	}
 	
 	//location.reload();
