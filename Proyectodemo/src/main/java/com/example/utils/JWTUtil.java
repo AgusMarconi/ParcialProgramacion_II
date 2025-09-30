@@ -31,7 +31,7 @@ public class JWTUtil {
 	            .getLogger(JWTUtil.class);
 
 	    /**
-	     * palabra secreta=ghk45jgherogho834go3h4g
+	     * palabra secreta=lekf783r90jsd9038
 	     * 
 	     * Create a new token.
 	     *
