@@ -37,18 +37,6 @@ public class UsuarioController {
 		return List.of("Diego","Juan","Pedro");
 	}
 	
-	/*@RequestMapping(value="usuario")
-	public Usuario getUsuario() {
-		Usuario user=new Usuario();
-		user.setNombre("Agustina");
-		user.setApellido("Marconi");
-		user.setEmail("agustinamarconi39@gmail.com");
-		user.setTelefono("2615160338");
-		
-		return user;
-		
-	}*/
-	
 	@RequestMapping(value="usuario/{id}")
 	public Usuario getUsuarioId(@PathVariable Long id){
 		Usuario user=new Usuario();
@@ -62,6 +50,8 @@ public class UsuarioController {
 	}
 	
 	
+	
+	
 	@RequestMapping(value="api/usuarios")
 	public List<Usuario> getUsuario(@RequestHeader(value="Authorization") String token){
 		
@@ -73,13 +63,6 @@ public class UsuarioController {
 		List<Usuario> usuarios=usuarioDao.getUsuarios();
 		
 		return usuarios;
-		/*Usuario user=new Usuario();
-		user.setId(1L);
-		user.setNombre("Agustina");
-		user.setApellido("Marconi");
-		user.setEmail("agustinamarconi39@gmail.com");
-		user.setTelefono("2615160338");
-		usuarios.add(user);*/
 
 	}
 	
