@@ -20,7 +20,9 @@ $(document).ready(function() {
 	const respuesta=await request.text();
 	
 	
-	if (respuesta==="OK"){
+	if (respuesta != 'Fail'){
+		localStorage.token = respuesta;
+		localStorage.email = datos.email;
 		alert("¡Inicio de Sesión con exito!");
 		window.location.href="usuarios.html";
 	}else{

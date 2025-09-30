@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +8,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.DAO.UsuarioDAO;
 import com.example.models.Usuario;
+import com.example.utils.JWTUtil;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -20,6 +23,9 @@ import de.mkammerer.argon2.Argon2Factory;
 public class UsuarioController {
 	@Autowired
 	private UsuarioDAO usuarioDao;
+	
+	@Autowired
+	private JWTUtil jwtUtil;
 	
 	@RequestMapping(value="mensaje")
 	public String mensaje(){
@@ -57,7 +63,13 @@ public class UsuarioController {
 	
 	
 	@RequestMapping(value="api/usuarios")
-	public List<Usuario> getUsuario(){
+	public List<Usuario> getUsuario(@RequestHeader(value="Authorization") String token){
+		
+		String usuarioId = jwtUtil.getKey(token);
+		
+		if (usuarioId == null) {
+			return new ArrayList<>();
+		}
 		List<Usuario> usuarios=usuarioDao.getUsuarios();
 		
 		return usuarios;
@@ -72,7 +84,13 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping(value="api/usuarios/{id}")
-	public void deleteUsuario(@PathVariable Long id) {
+	public void deleteUsuario(@RequestHeader(value="Authorization") String token, @PathVariable Long id) {
+		
+		String usuarioId = jwtUtil.getKey(token);
+		
+		if (usuarioId == null) {
+			return;
+		}
 		usuarioDao.eliminarUsuario(id);
 	}
 	

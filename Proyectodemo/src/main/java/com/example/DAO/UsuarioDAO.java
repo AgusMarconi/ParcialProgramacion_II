@@ -13,6 +13,6 @@ public interface UsuarioDAO {
 	List<Usuario> getUsuarios();
 	void eliminarUsuario(Long id);
 	void registrarUsuario(Usuario usuario);
-	boolean verificarCredenciales(Usuario usuario);
+	Usuario obtenerUsuarioPorCredenciales(Usuario usuario);
 	
 }
